@@ -1,0 +1,6 @@
+name = "ellis-library-gemini-proxy"
+main = "worker.js"
+compatibility_date = "2026-06-28"
+
+# The Gemini key is NOT stored here. It is set as an encrypted secret with:
+#   npx wrangler secret put GEMINI_API_KEY

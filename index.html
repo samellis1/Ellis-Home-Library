@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ellis Home Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* color-hex palette #1037729 */
+    --cream:#F5F5DC; --lightblue:#A7C2CC; --olive:#4B543B; --brown:#423629; --steel:#5B7C99;
+    --bg:#F5F5DC; --card:#FCFCF2; --ink:#423629; --muted:#6E6553;
+    --line:#E4E1C9; --accent:#4B543B; --accent-soft:#DCE7EB; --chip:#EAE8D4;
+    --shadow:0 1px 3px rgba(66,54,41,.07),0 8px 24px rgba(66,54,41,.06);
+    --display:'Cormorant',Georgia,'Times New Roman',serif;
+    --body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--body);
+    line-height:1.5;}
+  header{padding:28px 20px 8px;text-align:center}
+  header h1{margin:0;font-size:46px;letter-spacing:.01em;font-weight:600;
+    font-family:var(--display)}
+  header p{margin:6px 0 0;color:var(--muted);font-size:14px}
+  .wrap{max-width:1100px;margin:0 auto;padding:16px 20px 80px}
+  .tabs{display:flex;gap:8px;justify-content:center;margin:18px 0 22px}
+  .tab{padding:9px 18px;border-radius:999px;border:1px solid var(--line);
+    background:var(--card);cursor:pointer;font-size:15px;font-weight:600;color:var(--muted);
+    font-family:var(--display);letter-spacing:.03em}
+  .tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  /* search */
+  .searchbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  .searchbar input[type=search]{flex:1;min-width:220px;padding:13px 16px;border-radius:12px;
+    border:1px solid var(--line);background:var(--card);font-size:15px;box-shadow:var(--shadow)}
+  select{padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);font-size:14px}
+  .count{color:var(--muted);font-size:13px;margin:2px 2px 14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .book{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;
+    box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px}
+  .book .t{font-weight:600;font-size:21px;letter-spacing:.01em;font-family:var(--display);line-height:1.15}
+  .book .a{color:var(--muted);font-size:13px}
+  .book .tags{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+  .chip{font-size:11px;padding:3px 9px;border-radius:999px;background:var(--chip);color:#5b574c;font-weight:600}
+  .chip.aud{background:var(--accent-soft);color:var(--steel)}
+  .empty{text-align:center;color:var(--muted);padding:50px 0}
+  /* chat */
+  .chat-intro{color:var(--muted);font-size:14px;margin-bottom:14px;text-align:center}
+  .keybox{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+    margin-bottom:16px;box-shadow:var(--shadow)}
+  .keybox summary{cursor:pointer;font-weight:600;font-size:14px}
+  .keybox .row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  .keybox input{flex:1;min-width:220px;padding:11px 13px;border-radius:10px;border:1px solid var(--line);font-size:14px}
+  .keybox a{color:var(--accent)}
+  .keybox .hint{font-size:12px;color:var(--muted);margin-top:8px}
+  .btn{padding:11px 18px;border-radius:10px;border:none;background:var(--accent);color:#fff;
+    font-weight:700;cursor:pointer;font-size:14px}
+  .btn:disabled{opacity:.5;cursor:default}
+  .btn.ghost{background:var(--chip);color:var(--ink)}
+  .chatlog{display:flex;flex-direction:column;gap:14px;margin-bottom:16px}
+  .msg{max-width:90%;padding:13px 16px;border-radius:14px;font-size:14px;white-space:pre-wrap}
+  .msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:4px}
+  .msg.bot{align-self:flex-start;background:var(--card);border:1px solid var(--line);border-bottom-left-radius:4px}
+  .recs{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+  .rec{border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:var(--bg)}
+  .rec .rt{font-weight:600;font-size:20px;font-family:var(--display);letter-spacing:.01em}
+  .rec .ra{color:var(--muted);font-size:12.5px;margin-bottom:4px}
+  .rec .rw{font-size:13px}
+  .askbar{display:flex;gap:10px}
+  .askbar input{flex:1;padding:13px 16px;border-radius:12px;border:1px solid var(--line);
+    background:var(--card);font-size:15px;box-shadow:var(--shadow)}
+  .examples{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .example{font-size:12.5px;padding:7px 12px;border-radius:999px;background:var(--card);
+    border:1px solid var(--line);cursor:pointer;color:#5b574c}
+  .hidden{display:none}
+  .spin{display:inline-block;width:14px;height:14px;border:2px solid #fff;border-top-color:transparent;
+    border-radius:50%;animation:s .7s linear infinite;vertical-align:-2px;margin-right:6px}
+  @keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<header>
+  <h1>📚 Ellis Home Library</h1>
+  <p id="subtitle">Loading your shelves…</p>
+</header>
+
+<div class="wrap">
+  <div class="tabs">
+    <div class="tab active" data-tab="search">🔍 Search</div>
+    <div class="tab" data-tab="chat">💬 Recommend me a book</div>
+  </div>
+
+  <!-- SEARCH -->
+  <section id="search-view">
+    <div class="searchbar">
+      <input type="search" id="q" placeholder="Search by title or author…" autocomplete="off">
+      <select id="genre"><option value="">All genres</option></select>
+      <select id="audience"><option value="">All audiences</option></select>
+    </div>
+    <div class="count" id="count"></div>
+    <div class="grid" id="grid"></div>
+    <div class="empty hidden" id="empty">No books match your search.</div>
+  </section>
+
+  <!-- CHAT -->
+  <section id="chat-view" class="hidden">
+    <p class="chat-intro">Describe a mood, topic, or who it's for — I'll pick a few books <strong>from your shelves</strong>.</p>
+
+    <div class="examples" id="examples"></div>
+    <div class="chatlog" id="chatlog"></div>
+    <div class="askbar">
+      <input type="text" id="ask" placeholder="e.g. Something uplifting for a 10-year-old who loves dragons">
+      <button class="btn" id="send">Ask</button>
+    </div>
+  </section>
+</div>
+
+<script>
+// Recommendations go through a Cloudflare Worker proxy that holds the Gemini
+// key server-side, so NO API key is ever exposed in this page. This URL is not
+// a secret. Replace it with your deployed Worker URL (see proxy/DEPLOY.md).
+const PROXY_URL = "https://ellis-library-gemini-proxy.YOUR-SUBDOMAIN.workers.dev";
+let BOOKS = [];
+
+/* ---------- load catalog ---------- */
+async function load(){
+  try{
+    const r = await fetch('books.json');
+    if(!r.ok) throw new Error();
+    const data = await r.json();
+    BOOKS = data.books || [];
+  }catch(e){
+    document.getElementById('subtitle').textContent =
+      "⚠️ Couldn't load books.json — run a local server (see README) instead of opening the file directly.";
+    return;
+  }
+  document.getElementById('subtitle').textContent = `${BOOKS.length} books across your shelves`;
+  initFilters();
+  render();
+  initExamples();
+}
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('.tab').forEach(t=>{
+  t.onclick=()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    const isSearch = t.dataset.tab==='search';
+    document.getElementById('search-view').classList.toggle('hidden',!isSearch);
+    document.getElementById('chat-view').classList.toggle('hidden',isSearch);
+  };
+});
+
+/* ---------- search ---------- */
+function initFilters(){
+  const genres=[...new Set(BOOKS.map(b=>b.genre))].sort();
+  const auds=[...new Set(BOOKS.map(b=>b.audience))].sort();
+  const g=document.getElementById('genre'), a=document.getElementById('audience');
+  genres.forEach(x=>g.add(new Option(x,x)));
+  auds.forEach(x=>a.add(new Option(x,x)));
+  ['q'].forEach(id=>document.getElementById(id).addEventListener('input',render));
+  [g,a].forEach(el=>el.addEventListener('change',render));
+}
+function render(){
+  const q=document.getElementById('q').value.trim().toLowerCase();
+  const g=document.getElementById('genre').value;
+  const a=document.getElementById('audience').value;
+  const out=BOOKS.filter(b=>{
+    const hay=(b.title+' '+b.author).toLowerCase();
+    return (!q||hay.includes(q)) && (!g||b.genre===g) && (!a||b.audience===a);
+  }).sort((x,y)=>x.title.localeCompare(y.title));
+  const grid=document.getElementById('grid');
+  grid.innerHTML=out.map(b=>`
+    <div class="book">
+      <div class="t">${esc(b.title)}</div>
+      <div class="a">${esc(b.author)}</div>
+      <div class="tags"><span class="chip">${esc(b.genre)}</span><span class="chip aud">${esc(b.audience)}</span></div>
+    </div>`).join('');
+  document.getElementById('empty').classList.toggle('hidden',out.length>0);
+  document.getElementById('count').textContent=`Showing ${out.length} of ${BOOKS.length} books`;
+}
+function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+/* ---------- examples ---------- */
+function initExamples(){
+  const ex=["Something uplifting for a 10-year-old who loves dragons",
+            "A book to help me with marriage and communication",
+            "Funny middle-grade fiction",
+            "Help me get better with money",
+            "A challenging philosophy read"];
+  document.getElementById('examples').innerHTML=
+    ex.map(e=>`<span class="example">${esc(e)}</span>`).join('');
+  document.querySelectorAll('.example').forEach(el=>
+    el.onclick=()=>{document.getElementById('ask').value=el.textContent;ask();});
+}
+
+/* ---------- chat ---------- */
+const log=document.getElementById('chatlog');
+function addUser(t){const d=document.createElement('div');d.className='msg user';d.textContent=t;log.appendChild(d);scroll();}
+function addBot(t){const d=document.createElement('div');d.className='msg bot';d.textContent=t;log.appendChild(d);scroll();return d;}
+function scroll(){window.scrollTo(0,document.body.scrollHeight);}
+
+document.getElementById('send').onclick=ask;
+document.getElementById('ask').addEventListener('keydown',e=>{if(e.key==='Enter')ask();});
+
+async function ask(){
+  const input=document.getElementById('ask');
+  const prompt=input.value.trim();
+  if(!prompt)return;
+  input.value='';
+  log.innerHTML='';            // one chat at a time — clear previous Q&A
+  addUser(prompt);
+  const btn=document.getElementById('send'); btn.disabled=true;
+  const thinking=addBot('Looking through your shelves…');
+  thinking.innerHTML='<span class="spin"></span>Looking through your shelves…';
+  try{
+    const recs=await recommend(prompt);
+    thinking.remove();
+    showRecs(prompt,recs);
+  }catch(err){
+    thinking.textContent='⚠️ '+err.message;
+  }finally{ btn.disabled=false; }
+}
+
+async function recommend(prompt){
+  const catalog=BOOKS.map((b,i)=>`${i}. "${b.title}" by ${b.author} [${b.genre}, ${b.audience}]`).join('\n');
+  const sys=`You are a librarian for a personal home library. Recommend 2-4 books ONLY from the catalog below that best fit the user's request. Use the exact title and author from the catalog. If nothing fits well, say so honestly in the intro and recommend the closest options.\n\nCATALOG:\n${catalog}`;
+  const body={
+    contents:[{role:"user",parts:[{text:prompt}]}],
+    systemInstruction:{parts:[{text:sys}]},
+    generationConfig:{
+      temperature:0.6,
+      responseMimeType:"application/json",
+      responseSchema:{
+        type:"OBJECT",
+        properties:{
+          intro:{type:"STRING"},
+          recommendations:{type:"ARRAY",items:{type:"OBJECT",
+            properties:{title:{type:"STRING"},author:{type:"STRING"},reason:{type:"STRING"}},
+            required:["title","author","reason"]}}
+        },
+        required:["intro","recommendations"]
+      }
+    }
+  };
+  const r=await fetch(PROXY_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  if(!r.ok){
+    const e=await r.json().catch(()=>({}));
+    throw new Error(e?.error?.message || `Recommendation request failed (${r.status})`);
+  }
+  const data=await r.json();
+  const txt=data?.candidates?.[0]?.content?.parts?.[0]?.text;
+  if(!txt) throw new Error("Empty response from Gemini.");
+  return JSON.parse(txt);
+}
+
+function showRecs(prompt,res){
+  const wrap=addBot(res.intro||"Here are a few picks:");
+  const recs=document.createElement('div'); recs.className='recs';
+  (res.recommendations||[]).forEach(r=>{
+    // verify the rec is actually in the catalog
+    const inCat=BOOKS.some(b=>b.title.toLowerCase()===(r.title||'').toLowerCase());
+    const el=document.createElement('div'); el.className='rec';
+    el.innerHTML=`<div class="rt">${esc(r.title)}${inCat?'':' <span class="chip">not in catalog</span>'}</div>
+      <div class="ra">${esc(r.author)}</div>
+      <div class="rw">${esc(r.reason)}</div>`;
+    recs.appendChild(el);
+  });
+  wrap.appendChild(recs);
+  scroll();
+}
+
+load();
+</script>
+</body>
+</html>
