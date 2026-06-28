@@ -13,7 +13,7 @@ const MODEL = "gemini-2.5-flash-lite";
 // non-browser clients, so this stops casual abuse from other websites but is
 // not airtight — see DEPLOY.md. Add any custom domain you use here too.
 const ALLOWED_ORIGINS = new Set([
-  "https://samellis112.github.io",
+  "https://samellis1.github.io",
 ]);
 
 function corsHeaders(origin) {

@@ -1,0 +1,5 @@
+# Wrangler local state/cache
+proxy/.wrangler/
+
+# macOS
+.DS_Store

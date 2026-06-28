@@ -32,7 +32,7 @@ public site. The page calls the Worker; the Worker calls Gemini.
 
 5. **Allow your site's origin.** In `worker.js`, make sure `ALLOWED_ORIGINS`
    includes the origin your GitHub Pages site is served from, e.g.
-   `https://samellis112.github.io` (origin only — no path). Add a custom domain
+   `https://samellis1.github.io` (origin only — no path). Add a custom domain
    here too if you use one. Re-run `npx wrangler deploy` after any change.
 
 6. **Commit & push** `index.html` (now key-free) to GitHub. ✅ Safe — no secret in it.
@@ -41,7 +41,7 @@ public site. The page calls the Worker; the Worker calls Gemini.
 ```sh
 curl -X POST "https://YOUR-WORKER-URL" \
   -H "Content-Type: application/json" \
-  -H "Origin: https://samellis112.github.io" \
+  -H "Origin: https://samellis1.github.io" \
   -d '{"contents":[{"role":"user","parts":[{"text":"hi"}]}]}'
 ```
 A JSON response with `candidates` means it works. A `403 Forbidden origin`
