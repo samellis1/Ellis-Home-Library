@@ -97,7 +97,6 @@
     <div class="searchbar">
       <input type="search" id="q" placeholder="Search by title or author…" autocomplete="off">
       <select id="genre"><option value="">All genres</option></select>
-      <select id="audience"><option value="">All audiences</option></select>
     </div>
     <div class="count" id="count"></div>
     <div class="grid" id="grid"></div>
@@ -166,27 +165,24 @@ function resetChat(){
 /* ---------- search ---------- */
 function initFilters(){
   const genres=[...new Set(BOOKS.map(b=>b.genre))].sort();
-  const auds=[...new Set(BOOKS.map(b=>b.audience))].sort();
-  const g=document.getElementById('genre'), a=document.getElementById('audience');
+  const g=document.getElementById('genre');
   genres.forEach(x=>g.add(new Option(x,x)));
-  auds.forEach(x=>a.add(new Option(x,x)));
   ['q'].forEach(id=>document.getElementById(id).addEventListener('input',render));
-  [g,a].forEach(el=>el.addEventListener('change',render));
+  g.addEventListener('change',render);
 }
 function render(){
   const q=document.getElementById('q').value.trim().toLowerCase();
   const g=document.getElementById('genre').value;
-  const a=document.getElementById('audience').value;
   const out=BOOKS.filter(b=>{
     const hay=(b.title+' '+b.author).toLowerCase();
-    return (!q||hay.includes(q)) && (!g||b.genre===g) && (!a||b.audience===a);
+    return (!q||hay.includes(q)) && (!g||b.genre===g);
   }).sort((x,y)=>x.title.localeCompare(y.title));
   const grid=document.getElementById('grid');
   grid.innerHTML=out.map(b=>`
     <div class="book">
       <div class="t">${esc(b.title)}</div>
       <div class="a">${esc(b.author)}</div>
-      <div class="tags"><span class="chip">${esc(b.genre)}</span><span class="chip aud">${esc(b.audience)}</span></div>
+      <div class="tags"><span class="chip">${esc(b.genre)}</span></div>
     </div>`).join('');
   document.getElementById('empty').classList.toggle('hidden',out.length>0);
   document.getElementById('count').textContent=`Showing ${out.length} of ${BOOKS.length} books`;
