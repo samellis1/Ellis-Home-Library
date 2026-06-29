@@ -9,10 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
 <style>
   :root{
-    /* color-hex palette #1037729 */
-    --cream:#F5F5DC; --lightblue:#A7C2CC; --olive:#4B543B; --brown:#423629; --steel:#5B7C99;
+    /* color-hex palette #1037729 — browns & blues only */
+    --beige:#F5F5DC; --lightblue:#A7C2CC; --brown:#423629; --steel:#5B7C99;
     --bg:#F5F5DC; --card:#FCFCF2; --ink:#423629; --muted:#6E6553;
-    --line:#E4E1C9; --accent:#4B543B; --accent-soft:#DCE7EB; --chip:#EAE8D4;
+    --line:#E4E1C9; --accent:#5B7C99; --accent-hover:#4A6880; --accent-soft:#A7C2CC;
+    --chip:#E3EBF0; --chip-ink:#3F5B72;
     --shadow:0 1px 3px rgba(66,54,41,.07),0 8px 24px rgba(66,54,41,.06);
     --display:'Cormorant',Georgia,'Times New Roman',serif;
     --body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
@@ -43,7 +44,7 @@
   .book .t{font-weight:600;font-size:21px;letter-spacing:.01em;font-family:var(--display);line-height:1.15}
   .book .a{color:var(--muted);font-size:13px}
   .book .tags{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
-  .chip{font-size:11px;padding:3px 9px;border-radius:999px;background:var(--chip);color:#5b574c;font-weight:600}
+  .chip{font-size:11px;padding:3px 9px;border-radius:999px;background:var(--chip);color:var(--chip-ink);font-weight:600}
   .chip.aud{background:var(--accent-soft);color:var(--steel)}
   .empty{text-align:center;color:var(--muted);padding:50px 0}
   /* chat */
@@ -56,7 +57,8 @@
   .keybox a{color:var(--accent)}
   .keybox .hint{font-size:12px;color:var(--muted);margin-top:8px}
   .btn{padding:11px 18px;border-radius:10px;border:none;background:var(--accent);color:#fff;
-    font-weight:700;cursor:pointer;font-size:14px}
+    font-weight:700;cursor:pointer;font-size:14px;transition:background .15s}
+  .btn:hover:not(:disabled){background:var(--accent-hover)}
   .btn:disabled{opacity:.5;cursor:default}
   .btn.ghost{background:var(--chip);color:var(--ink)}
   .chatlog{display:flex;flex-direction:column;gap:14px;margin-bottom:16px}
@@ -82,14 +84,14 @@
 </head>
 <body>
 <header>
-  <h1>📚 Ellis Home Library</h1>
+  <h1>Ellis Home Library</h1>
   <p id="subtitle">Loading your shelves…</p>
 </header>
 
 <div class="wrap">
   <div class="tabs">
-    <div class="tab active" data-tab="search">🔍 Search</div>
-    <div class="tab" data-tab="chat">💬 Recommend me a book</div>
+    <div class="tab active" data-tab="search">Search</div>
+    <div class="tab" data-tab="chat">Recommend me a book</div>
   </div>
 
   <!-- SEARCH -->
@@ -107,7 +109,6 @@
   <section id="chat-view" class="hidden">
     <p class="chat-intro">Describe a mood, topic, or who it's for — I'll pick a few books <strong>from your shelves</strong>.</p>
 
-    <div class="examples" id="examples"></div>
     <div class="chatlog" id="chatlog"></div>
     <div class="askbar">
       <input type="text" id="ask" placeholder="e.g. Something uplifting for a 10-year-old who loves dragons">
@@ -132,13 +133,12 @@ async function load(){
     BOOKS = data.books || [];
   }catch(e){
     document.getElementById('subtitle').textContent =
-      "⚠️ Couldn't load books.json — run a local server (see README) instead of opening the file directly.";
+      "Couldn't load books.json — run a local server (see README) instead of opening the file directly.";
     return;
   }
   document.getElementById('subtitle').textContent = `${BOOKS.length} books across your shelves`;
   initFilters();
   render();
-  initExamples();
 }
 
 /* ---------- tabs ---------- */
@@ -189,19 +189,6 @@ function render(){
 }
 function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 
-/* ---------- examples ---------- */
-function initExamples(){
-  const ex=["Something uplifting for a 10-year-old who loves dragons",
-            "A book to help me with marriage and communication",
-            "Funny middle-grade fiction",
-            "Help me get better with money",
-            "A challenging philosophy read"];
-  document.getElementById('examples').innerHTML=
-    ex.map(e=>`<span class="example">${esc(e)}</span>`).join('');
-  document.querySelectorAll('.example').forEach(el=>
-    el.onclick=()=>{document.getElementById('ask').value=el.textContent;ask();});
-}
-
 /* ---------- chat ---------- */
 const log=document.getElementById('chatlog');
 function addUser(t){const d=document.createElement('div');d.className='msg user';d.textContent=t;log.appendChild(d);scroll();}
@@ -226,7 +213,7 @@ async function ask(){
     thinking.remove();
     showRecs(prompt,recs);
   }catch(err){
-    thinking.textContent='⚠️ '+err.message;
+    thinking.textContent=err.message;
   }finally{ btn.disabled=false; }
 }
 
