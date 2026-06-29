@@ -2,7 +2,8 @@
   "meta": {
     "title": "Home Library Catalog",
     "generated": "2026-06-28",
-    "note": "Cataloged from spine photos. Some tightly-packed or faint spines could not be read with confidence and were omitted."
+    "revised": "2026-06-28",
+    "note": "Cataloged from spine photos. Revised after a re-check: 'The Brothers Karamazov' was a misread of 'Founding Brothers' by Joseph J. Ellis (IMG_8972/8973) and has been corrected; the Jung entry was trimmed to its actual spine title; and several legible titles from the dense shelves (IMG_8960 and IMG_8961) were added. Some tightly-packed or faint spines on those shelves may still be incomplete."
   },
   "books": [
     { "title": "The Great Divorce", "author": "C.S. Lewis", "genre": "Religion & Spirituality", "audience": "Adult" },
@@ -41,6 +42,9 @@
     { "title": "Little People, BIG DREAMS: Marie Curie", "author": "Maria Isabel Sánchez Vegara", "genre": "Children's Nonfiction", "audience": "Children" },
     { "title": "Little People, BIG DREAMS: Rosa Parks", "author": "Maria Isabel Sánchez Vegara", "genre": "Children's Nonfiction", "audience": "Children" },
     { "title": "Little People, BIG DREAMS: Audrey Hepburn", "author": "Maria Isabel Sánchez Vegara", "genre": "Children's Nonfiction", "audience": "Children" },
+    { "title": "Little People, BIG DREAMS: Anne Frank", "author": "Maria Isabel Sánchez Vegara", "genre": "Children's Nonfiction", "audience": "Children" },
+    { "title": "Little People, BIG DREAMS: David Bowie", "author": "Maria Isabel Sánchez Vegara", "genre": "Children's Nonfiction", "audience": "Children" },
+    { "title": "Little People, BIG DREAMS: Maya Angelou", "author": "Maria Isabel Sánchez Vegara", "genre": "Children's Nonfiction", "audience": "Children" },
     { "title": "Beneath the Surface", "author": "Michael Phelps", "genre": "Biography & Memoir", "audience": "Adult" },
     { "title": "The Wednesday Wars", "author": "Gary D. Schmidt", "genre": "Children's Fiction", "audience": "Children" },
     { "title": "Okay for Now", "author": "Gary D. Schmidt", "genre": "Children's Fiction", "audience": "Children" },
@@ -100,10 +104,10 @@
     { "title": "The 7 Habits of Highly Effective Teens", "author": "Sean Covey", "genre": "Self-Help & Psychology", "audience": "All Ages" },
     { "title": "The Token of the Bow", "author": "Unknown", "genre": "Fiction & Literature", "audience": "Adult" },
     { "title": "A Beginner's Guide to Constructing the Universe", "author": "Michael S. Schneider", "genre": "Reference & Education", "audience": "Adult" },
-    { "title": "The Brothers Karamazov", "author": "Fyodor Dostoevsky", "genre": "Fiction & Literature", "audience": "Adult" },
-    { "title": "Cain and Abel / Man and His Symbols", "author": "Carl G. Jung", "genre": "Self-Help & Psychology", "audience": "Adult" },
+    { "title": "Founding Brothers: The Revolutionary Generation", "author": "Joseph J. Ellis", "genre": "Politics & Society", "audience": "Adult", "note": "Corrected from a prior misread as 'The Brothers Karamazov'. Verified in IMG_8972 and IMG_8973." },
+    { "title": "Man and His Symbols", "author": "Carl G. Jung", "genre": "Self-Help & Psychology", "audience": "Adult", "note": "Spine reads 'Man and His Symbols'; prior 'Cain and Abel' portion removed." },
     { "title": "Musashi", "author": "Eiji Yoshikawa", "genre": "Fiction & Literature", "audience": "Adult" },
-    { "title": "The Anatomy of the Hummingbird", "author": "Unknown", "genre": "Fiction & Literature", "audience": "Adult" },
+    { "title": "The Anatomy of the Hummingbird", "author": "Unknown", "genre": "Fiction & Literature", "audience": "Adult", "note": "Spine legible only as 'Hummingbird'; full title approximate." },
     { "title": "Restart", "author": "Gordon Korman", "genre": "Children's Fiction", "audience": "Children" },
     { "title": "What If?", "author": "Randall Munroe", "genre": "Reference & Education", "audience": "Adult" },
 
@@ -255,6 +259,23 @@
     { "title": "What to Expect When You're Expecting", "author": "Heidi Murkoff", "genre": "Marriage & Parenting", "audience": "Adult" },
     { "title": "The 7 Habits of Highly Effective People", "author": "Stephen R. Covey", "genre": "Self-Help & Psychology", "audience": "Adult" },
     { "title": "Joseph Smith (Biography)", "author": "Various", "genre": "Religion & Spirituality", "audience": "Adult" },
+
+    { "title": "The Norton Anthology of World Masterpieces", "author": "Various (ed. Maynard Mack)", "genre": "Fiction & Literature", "audience": "Adult", "note": "Added from re-check of IMG_8960." },
+    { "title": "Becoming Steve Jobs", "author": "Brent Schlender & Rick Tetzeli", "genre": "Biography & Memoir", "audience": "Adult", "note": "Added from re-check of IMG_8960." },
+    { "title": "Three Cups of Tea", "author": "Greg Mortenson & David Oliver Relin", "genre": "Biography & Memoir", "audience": "Adult", "note": "Added from re-check of IMG_8960." },
+    { "title": "The Innocent Man", "author": "John Grisham", "genre": "Biography & Memoir", "audience": "Adult", "note": "Added from re-check of IMG_8960." },
+    { "title": "The Book of Virtues", "author": "William J. Bennett", "genre": "Self-Help & Psychology", "audience": "Adult", "note": "Added from re-check of IMG_8960." },
+    { "title": "The Power of Positive Thinking", "author": "Norman Vincent Peale", "genre": "Self-Help & Psychology", "audience": "Adult", "note": "Added from re-check of IMG_8960." },
+    { "title": "Leadership and Self-Deception", "author": "The Arbinger Institute", "genre": "Self-Help & Psychology", "audience": "Adult", "note": "Added from re-check of IMG_8960." },
+    { "title": "The Work and the Glory", "author": "Gerald N. Lund", "genre": "Fiction & Literature", "audience": "Adult", "note": "Added from re-check of IMG_8961." },
+    { "title": "Believing Christ", "author": "Stephen E. Robinson", "genre": "Religion & Spirituality", "audience": "Adult", "note": "Added from re-check of IMG_8961." },
+    { "title": "The Miracle of Forgiveness", "author": "Spencer W. Kimball", "genre": "Religion & Spirituality", "audience": "Adult", "note": "Added from re-check of IMG_8961." },
+    { "title": "Teachings of the Prophet Joseph Smith", "author": "Joseph Smith (ed. Joseph Fielding Smith)", "genre": "Religion & Spirituality", "audience": "Adult", "note": "Added from re-check of IMG_8961." },
+    { "title": "Exploring the Lands of the Book of Mormon", "author": "Joseph L. Allen", "genre": "Religion & Spirituality", "audience": "Adult", "note": "Added from re-check of IMG_8961." },
+    { "title": "Strengthening Our Families", "author": "Various (ed. David C. Dollahite)", "genre": "Marriage & Parenting", "audience": "Adult", "note": "Added from re-check of IMG_8961." },
+    { "title": "Employment Law", "author": "Various (textbook)", "genre": "Reference & Education", "audience": "Adult", "note": "Added from re-check of IMG_8961." },
+    { "title": "Constitutional Law", "author": "Various (textbook)", "genre": "Reference & Education", "audience": "Adult", "note": "Added from re-check of IMG_8961." },
+    { "title": "The Ultimate Kauai Guidebook", "author": "Andrew Doughty", "genre": "Home, Travel & Lifestyle", "audience": "Adult", "note": "Added from re-check of IMG_8961." },
 
     { "title": "The First Encyclopedia (Set)", "author": "Usborne", "genre": "Children's Nonfiction", "audience": "Children" },
     { "title": "Brain Quest / Ask Me (Q&A Set)", "author": "Various", "genre": "Children's Nonfiction", "audience": "Children" },
