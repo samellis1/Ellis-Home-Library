@@ -150,8 +150,18 @@ document.querySelectorAll('.tab').forEach(t=>{
     const isSearch = t.dataset.tab==='search';
     document.getElementById('search-view').classList.toggle('hidden',!isSearch);
     document.getElementById('chat-view').classList.toggle('hidden',isSearch);
+    if(isSearch) resetChat();   // leaving the recommend tab — clear the conversation
   };
 });
+
+function resetChat(){
+  const log=document.getElementById('chatlog');
+  if(log) log.innerHTML='';
+  const input=document.getElementById('ask');
+  if(input) input.value='';
+  const btn=document.getElementById('send');
+  if(btn) btn.disabled=false;
+}
 
 /* ---------- search ---------- */
 function initFilters(){
